@@ -21,7 +21,7 @@ public class BankLoginTest {
 
     @AfterAll
     static void cleanDatabase() {
-        SQLHelper.clean();
+        SQLHelper.cleanDatabase();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class BankLoginTest {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
-        verificationPage.validVerify(SQLHelper.getCode());
+        verificationPage.validVerify(String.valueOf(SQLHelper.getCode()));
     }
 
     @Test

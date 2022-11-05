@@ -1,6 +1,6 @@
 package ru.netology.data;
 
-import com.sun.jdi.connect.spi.Connection;
+import java.sql.Connection;
 
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
@@ -21,7 +21,7 @@ public class SQLHelper {
         return (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
     }
 
-    public static DataHelper.VerificationCode getVerificationCode() {
+    public static DataHelper.VerificationCode getCode() {
         var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             var result = runner.query((java.sql.Connection) conn, codeSQL, new ScalarHandler<String>());
@@ -41,11 +41,4 @@ public class SQLHelper {
         runner.execute(String.valueOf(connection), "DELETE FROM users");
     }
 
-    public static String getCode() {
-        String code = null;
-        return null;
-    }
-
-    public static void clean() {
-    }
 }
